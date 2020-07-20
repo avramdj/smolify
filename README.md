@@ -1,2 +1,2 @@
 # Smolify
-# Smolify
+tiny url shortener
