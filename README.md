@@ -1,2 +1,4 @@
 # Smolify
-tiny url shortener
+url shortener
+
+<img src="img/ss.gif" width="500px">
