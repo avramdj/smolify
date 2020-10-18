@@ -1,12 +1,13 @@
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
 const helmet = require("helmet");
 const morgan = require('morgan')
 const { Url } = require('./models/url');
 const config = require('./config');
-const urlApi = require('./api/routes/url')
+const urlApi = require('./api/routes/url');
+const subdomain = require('express-subdomain');
 
 require('dotenv').config()
 const app = express();
@@ -25,7 +26,6 @@ app.use(morgan('tiny'))
 app.use(cors())
 app.use(express.json())
 
-
 app.use((req, res, next) => {
    if(req.subdomains === 'www') {
      res.redirect(301, `https://${req.headers.host}${req.url}`);
@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', urlApi);
+app.use(subdomain('api', urlApi));
 
 app.get('/', (req, res) => {
     return res.status(200).render('home.ejs')

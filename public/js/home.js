@@ -35,14 +35,14 @@ $(document).ready(function(){
         
         target.html(`
         <span class="titletext">smol url: </span>
-        <a id="linky" class="titletext" href="http://${res.baseurl}${res.hash}">${res.baseurl}${res.hash}</a>
+        <a id="linky" class="titletext" href="http://${res.newurl}">${res.newurl}</a>
         <br>
         <button id="copy" class="btn btn-outline-secondary btn-sm fixmarg2">copy</button>
         `)
         if(!target.hasClass("firstPop")){
             target.slideDown(350);
+            target.addClass("firstPop");
         }
-        target.addClass("firstPop");
         $("#copy").focus();
     }
 
@@ -59,20 +59,26 @@ $(document).ready(function(){
 
         if(!target.hasClass("firstPop")){
             target.slideDown(350);
+            target.addClass("firstPop");
         }
-        target.addClass("firstPop");
     }
 
-    $("#result").on("click", $("#copy"), function(){
-        copied = $("#linky").text();
-        navigator.clipboard.writeText(copied)
-        .then(s=>{
-            $("#copy").text("copied")
-        })
-        .then(s=>{
-            $("#linky").focus();
-        })
-        ;
+    $("#result").on("click", $("button#copy"), function(event){
+        if(event.target === $("#copy")[0]){
+            copied = $("#linky").text();
+            try {
+                navigator.clipboard.writeText(copied)
+                .then(s=>{
+                    $("#copy").text("copied")
+                })
+                .then(s=>{
+                    $("#linky").focus();
+                })
+                ;
+            } catch(error){
+                alert("your browser wont allow copying without HTTPS :/")
+            }
+        }
     })
 
     $("#hash").on("focus", function(){
@@ -85,5 +91,4 @@ $(document).ready(function(){
         $('#helpKey').fadeOut(350);
     });
     
-
 });

@@ -14,7 +14,8 @@
 }
 
 .errorSpan {
-    color: #ec7878
+    color: #ec7878;
+    height: 60px;
 }
 
 .fixmarg1 {
@@ -40,3 +41,31 @@
 .form-control::-moz-placeholder { opacity: 50%; }  /* Mozilla Firefox 19+ */
 .form-control:-ms-input-placeholder { opacity: 50%; }  /* Internet Explorer 10-11 */
 .form-control::-ms-input-placeholder { opacity: 50%; }  /* Microsoft Edge */
+
+
+.githubimg {
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    opacity: 50%;
+}
+
+.githubimg:hover {
+    cursor: pointer;
+}
+
+.ghlink:hover {
+    cursor: pointer;
+}
+
+/* .githublink {
+    opacity: 50%;
+}
+
+.githublink:hover {
+    opacity: 100%;
+} */
+
+#target {
+    height: 60px;
+}

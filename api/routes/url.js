@@ -5,9 +5,21 @@ const { Url, generateHash, existsHash } = require('../../models/url');
 const config = require('../../config')
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+    return res.status(200).json({
+        message: "Welcome to smolify... POST to /url"
+    });
+})
+
 router.post('/url', async (req, res, next) => {
     let { hash, url } = req.body;
     try{
+        if(!url){
+            error = new Error("POST request data should contain { url: url , hash: hash } or { url: url }")
+            error.status = 400;
+            throw error;
+            return
+        }
         if(!url.startsWith("http")){
             url = "http://" + url
         }
@@ -37,8 +49,7 @@ router.post('/url', async (req, res, next) => {
         })
         await newUrl.save();
         res.status(201).json({
-            baseurl: config.baseUrl,
-            hash: hash,
+            newurl: config.baseUrl + hash,
             oldurl: url
         });
     }catch(error){
